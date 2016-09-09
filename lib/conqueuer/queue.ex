@@ -30,20 +30,36 @@ defmodule Conqueuer.Queue do
     GenServer.call queue, :size
   end
 
+  def limit( queue ) do
+    GenServer.call queue, :limit
+  end
+
+  def limit_reached?( queue ) do
+    GenServer.call queue, :limit_reached?
+  end
+
   # Private API ############
 
   def init( args ) do
-    {:ok, %{queue: :queue.new}}
+    limit = Keyword.get(args, :limit, :unlimited)
+
+    {:ok, %{queue: :queue.new, limit: limit}}
   end
 
   def handle_cast(:empty, state) do
     {:noreply, %{state | queue: :queue.new}}
   end
 
-  def handle_call({:enqueue, item}, _from, state) do
-    %{queue: queue} = state
+  def handle_call({:enqueue, item}, _from, %{queue: queue, limit: limit} = state) when is_integer(limit) do
+    if queue_size(queue) >= limit do
+      {:reply, :limit_reached, state}
+    else
+      queue = :queue.in(item, queue)
+      {:reply, :ok, %{state | queue: queue}}
+    end
+  end
+  def handle_call({:enqueue, item}, _from, %{queue: queue} = state) do
     queue = :queue.in(item, queue)
-
     {:reply, :ok, %{state | queue: queue}}
   end
 
@@ -61,7 +77,23 @@ defmodule Conqueuer.Queue do
   end
 
   def handle_call(:size, _from, %{queue: queue} = state) do
-    {:reply, :queue.len(queue), state}
+    {:reply, queue_size(queue), state}
+  end
+
+  def handle_call(:limit, _from, %{limit: limit} = state) do
+    {:reply, limit, state}
+  end
+
+  def handle_call(:limit_reached?, _from, %{queue: queue, limit: limit} = state) when is_integer(limit) do
+    is_over_limt = queue_size(queue) >= limit
+    {:reply, is_over_limt, state}
+  end
+  def handle_call(:limit_reached?, _from, state) do
+    {:reply, false, state}
+  end
+
+  defp queue_size(queue) do
+    :queue.len(queue)
   end
 
 end

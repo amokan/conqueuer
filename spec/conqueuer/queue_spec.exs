@@ -5,10 +5,13 @@ defmodule ConqueuerSpec.Queue do
   alias Conqueuer.Queue
 
   before do
-    registered_name = ConqueuerSpec.Helpers.start_queue
-    Queue.empty registered_name
+    queue_name = ConqueuerSpec.Helpers.start_queue
+    Queue.empty queue_name
 
-    {:ok, queue: registered_name, item: 1}
+    limited_queue_name = ConqueuerSpec.Helpers.start_queue_with_limit(2)
+    Queue.empty limited_queue_name
+
+    { :ok, [queue: queue_name, limited_queue: limited_queue_name, item: 1] }
   end
 
   defmodule AnEmptyQueueSpec do
@@ -64,6 +67,47 @@ defmodule ConqueuerSpec.Queue do
 
     end
 
+  end
+
+  describe "when limiting queue size is empty" do
+    before do
+      Queue.enqueue( shared.limited_queue, shared.item )
+    end
+
+    it "should have a size of 1" do
+      expect( Queue.size( shared.limited_queue )).to eq( 1 )
+    end
+
+    it "should have a limit of 2" do
+      expect( Queue.limit( shared.limited_queue )).to eq( 2 )
+    end
+
+    it "should respond to limit_reached? with false" do
+      expect( Queue.limit_reached?( shared.limited_queue )).to be_false
+    end
+
+    describe "when limiting queue size is at or over the limit" do
+      before do
+        Queue.enqueue( shared.limited_queue, shared.item )
+      end
+
+      it "should have a size of 2" do
+        expect( Queue.size( shared.limited_queue )).to eq( 2 )
+      end
+
+      it "should have a limit of 2" do
+        expect( Queue.limit( shared.limited_queue )).to eq( 2 )
+      end
+
+      it "should respond to limit_reached? with true" do
+        expect( Queue.limit_reached?( shared.limited_queue )).to be_true
+      end
+
+      it "should prevent subsequent items from being queued and respond with `:limit_reached`" do
+        expect( Queue.enqueue( shared.limited_queue, shared.item )).to eq( :limit_reached )
+      end
+    end
+    
   end
 
 end
