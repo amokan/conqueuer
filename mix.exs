@@ -49,7 +49,7 @@ defmodule Conqueuer.Mixfile do
     [
       {:espec, "~> 0.8", only: :test},
       {:ex_doc, "~> 0.10", only: :dev},
-        {:earmark, ">= 0.0.0", only: :dev},
+      {:earmark, ">= 0.0.0", only: :dev},
       {:inflex, "~> 1.5"},
       {:poolboy, "~> 1.5"}
     ]
