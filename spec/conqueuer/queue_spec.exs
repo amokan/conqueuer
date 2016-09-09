@@ -52,6 +52,14 @@ defmodule ConqueuerSpec.Queue do
       expect( Queue.size( shared.queue )).to eq( 1 )
     end
 
+    it "should have a limit of `:unlimited`" do
+      expect( Queue.limit( shared.queue )).to eq( :unlimited )
+    end
+
+    it "should respond to limit_reached? with false" do
+      expect( Queue.limit_reached?( shared.queue )).to eq( false )
+    end
+
     it "should provide the item next" do
       {:ok, next_item} = Queue.next( shared.queue )
       expect( next_item ).to eq( shared.item )

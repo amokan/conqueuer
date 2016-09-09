@@ -6,6 +6,14 @@ defmodule Conqueuer.Queue do
 
   # Public API ############
 
+  @doc """
+  Starts a `Conqueuer.Queue` process.
+
+  ## Optional Args
+  
+    * `:limit` - if present, the queue will limit the number of items that are allowed to be enqueued
+      into memory.
+  """
   def start_link(args \\ [], opts \\ []) do
     GenServer.start_link __MODULE__, args, opts
   end
