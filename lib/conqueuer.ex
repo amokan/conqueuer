@@ -96,7 +96,7 @@ defmodule Conqueuer do
     {foreman_name, queue_name} = Util.infer_conqueuer_collaborator_names(name)
 
     case Conqueuer.Queue.enqueue(queue_name, args) do
-      {:ok} -> Conqueuer.Foreman.work_arrived(foreman_name)
+      :ok -> Conqueuer.Foreman.work_arrived(foreman_name)
       res -> res
     end
   end
