@@ -71,8 +71,6 @@ defmodule Conqueuer.Foreman do
   end
 
   def handle_cast( :work_arrived, state ) do
-    #debug "work arrived"
-
     %{pool_name: pool,
       queue_name: queue} = state
 
@@ -82,13 +80,10 @@ defmodule Conqueuer.Foreman do
   end
 
   def handle_cast( {:finished, worker}, state ) do
-    #debug "work finished, checking worker in"
-
     %{pool_name: pool,
       queue_name: queue} = state
 
     :poolboy.checkin( pool, worker )
-    #debug "Poolboy status: #{inspect :poolboy.status( pool )}"
 
     drain_queue pool, queue
 
@@ -98,7 +93,6 @@ defmodule Conqueuer.Foreman do
   # Private ##########
 
   defp drain_queue( pool, queue ) do
-    #debug "draining queue"
 
     case :poolboy.status( pool ) do
       {:ready, _, _, _} ->
@@ -108,7 +102,6 @@ defmodule Conqueuer.Foreman do
         do_work pool, queue
 
       {:full, _, _, _} ->
-        #warn "pool exhausted, stopping drain"
         :exhausted
     end
   end
@@ -121,7 +114,6 @@ defmodule Conqueuer.Foreman do
         drain_queue pool, queue
 
       :empty ->
-        #debug "queue empty, stopping drain"
         :empty
     end
   end
@@ -129,10 +121,5 @@ defmodule Conqueuer.Foreman do
   defp queue_next( queue ) do
     Conqueuer.Queue.next queue
   end
-
-  defp debug( msg ), do: Logger.debug "#{log_label} #{msg}"
-  defp warn( msg ),  do: Logger.warn "#{log_label} #{msg}"
-
-  defp log_label, do: "[#{Util.registered_name self}]"
 
 end

@@ -18,30 +18,48 @@ defmodule Conqueuer.Queue do
     GenServer.start_link __MODULE__, args, opts
   end
 
+  @doc """
+  Empties out the queue
+  """
   def empty( queue ) do
     GenServer.cast queue, :empty
   end
 
+  @doc """
+  """
   def enqueue( queue , item) do
     GenServer.call queue, {:enqueue, item}
   end
 
+  @doc """
+  """
   def member?( queue , item) do
     GenServer.call queue, {:member?, item}
   end
 
+  @doc """
+  """
   def next( queue ) do
     GenServer.call queue, :next
   end
 
+  @doc """
+  Returns the current queue size.
+  """
   def size( queue ) do
     GenServer.call queue, :size
   end
 
+  @doc """
+  Returns the configured queue limit, if applied.
+  """
   def limit( queue ) do
     GenServer.call queue, :limit
   end
 
+  @doc """
+  Checks the queue to see if the size limit was reached.
+  """
   def limit_reached?( queue ) do
     GenServer.call queue, :limit_reached?
   end

@@ -25,3 +25,7 @@ Conqueuer can be installed like:
         def application do
           [applications: [:conqueuer]]
         end
+
+### Testing
+
+`mix espec`
