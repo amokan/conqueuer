@@ -64,8 +64,4 @@ defmodule Conqueuer.Util do
     |> List.to_tuple
   end
 
-  def registered_name( pid ) do
-    Process.info( self )[:registered_name]
-  end
-
 end

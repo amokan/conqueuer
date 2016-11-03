@@ -149,7 +149,7 @@ defmodule Conqueuer do
       opts = [strategy: :one_for_one, name: MyApp.Supervisor]
       Supervisor.start_link(children, opts)
   """
-  def child_specs(pool_name, pool_supervisor_module, opts \\ []) do
+  def child_specs(pool_name, pool_supervisor_module, _opts) do
     import Supervisor.Spec, warn: false
 
     {foreman, pool, pool_supervisor, queue} = Util.infer_collaborator_names(pool_name)
