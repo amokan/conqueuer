@@ -44,7 +44,7 @@ defmodule Conqueuer.Util do
   # TODO move to external project
 
   def pid_as_string do
-    pid_to_string self
+    pid_to_string self()
   end
 
   def pid_to_string( pid ) do

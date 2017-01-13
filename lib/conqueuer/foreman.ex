@@ -110,7 +110,7 @@ defmodule Conqueuer.Foreman do
     case queue_next( queue ) do
       {:ok, args} ->
         worker = :poolboy.checkout( pool )
-        GenServer.cast worker, {:work, self, args}
+        GenServer.cast worker, {:work, self(), args}
         drain_queue pool, queue
 
       :empty ->
