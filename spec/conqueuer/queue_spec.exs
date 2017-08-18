@@ -19,7 +19,7 @@ defmodule ConqueuerSpec.Queue do
     use ESpec, shared: true
 
     it "should not agree the item is a member" do
-      expect( Queue.member?( shared.queue, shared.item )).to be_false
+      expect( Queue.member?( shared.queue, shared.item )).to be_false()
     end
 
     it "should have a size of 0" do
@@ -45,7 +45,7 @@ defmodule ConqueuerSpec.Queue do
     end
 
     it "should agree the item is a member" do
-      expect( Queue.member?( shared.queue, shared.item )).to be_true
+      expect( Queue.member?( shared.queue, shared.item )).to be_true()
     end
 
     it "should have a size of 1" do
@@ -91,7 +91,7 @@ defmodule ConqueuerSpec.Queue do
     end
 
     it "should respond to limit_reached? with false" do
-      expect( Queue.limit_reached?( shared.limited_queue )).to be_false
+      expect( Queue.limit_reached?( shared.limited_queue )).to be_false()
     end
 
     describe "when limiting queue size is at or over the limit" do
@@ -108,7 +108,7 @@ defmodule ConqueuerSpec.Queue do
       end
 
       it "should respond to limit_reached? with true" do
-        expect( Queue.limit_reached?( shared.limited_queue )).to be_true
+        expect( Queue.limit_reached?( shared.limited_queue )).to be_true()
       end
 
       it "should prevent subsequent items from being queued and respond with `:limit_reached`" do

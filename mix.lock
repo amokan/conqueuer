@@ -1,6 +1,6 @@
-%{"earmark": {:hex, :earmark, "1.0.3", "89bdbaf2aca8bbb5c97d8b3b55c5dd0cff517ecc78d417e87f1d0982e514557b", [:mix], []},
-  "espec": {:hex, :espec, "1.2.1", "faf0b54502688401097d8cb36da3f9ba75f894a39bccc65e5ae7bffb1256f03e", [:mix], [{:meck, "~> 0.8.4", [hex: :meck, optional: false]}]},
-  "ex_doc": {:hex, :ex_doc, "0.14.5", "c0433c8117e948404d93ca69411dd575ec6be39b47802e81ca8d91017a0cf83c", [:mix], [{:earmark, "~> 1.0", [hex: :earmark, optional: false]}]},
-  "inflex": {:hex, :inflex, "1.8.0", "7cfc752ae244b30b42ac9cf4c092771b485bc3424139aba4a933e54be8c63931", [:mix], []},
-  "meck": {:hex, :meck, "0.8.4", "59ca1cd971372aa223138efcf9b29475bde299e1953046a0c727184790ab1520", [:rebar, :make], []},
+%{"earmark": {:hex, :earmark, "1.2.3", "206eb2e2ac1a794aa5256f3982de7a76bf4579ff91cb28d0e17ea2c9491e46a4", [], [], "hexpm"},
+  "espec": {:hex, :espec, "1.4.5", "42defe77dadd02c011281a1ee22c5e468303d2806c024e9ee9be6d18171d771f", [], [{:meck, "0.8.7", [hex: :meck, repo: "hexpm", optional: false]}], "hexpm"},
+  "ex_doc": {:hex, :ex_doc, "0.16.2", "3b3e210ebcd85a7c76b4e73f85c5640c011d2a0b2f06dcdf5acdb2ae904e5084", [], [{:earmark, "~> 1.1", [hex: :earmark, repo: "hexpm", optional: false]}], "hexpm"},
+  "inflex": {:hex, :inflex, "1.8.1", "9fa9684ff1a872eab7415c0be500cc1b7782f28da6ed75423081e75f92831b1c", [], [], "hexpm"},
+  "meck": {:hex, :meck, "0.8.7", "ebad16ca23f685b07aed3bc011efff65fbaf28881a8adf925428ef5472d390ee", [], [], "hexpm"},
   "poolboy": {:hex, :poolboy, "1.5.1", "6b46163901cfd0a1b43d692657ed9d7e599853b3b21b95ae5ae0a777cf9b6ca8", [:rebar], []}}

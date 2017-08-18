@@ -8,7 +8,7 @@ defmodule ConqueuerSpec.Pool do
 
   it "should allow a worker check out" do
     :poolboy.transaction :something_workers, fn worker ->
-      expect( is_pid( worker )).to be_true
+      expect( is_pid( worker )).to be_true()
     end
   end
 

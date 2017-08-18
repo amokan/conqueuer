@@ -3,7 +3,7 @@ defmodule Conqueuer.Mixfile do
 
   def project do
     [app: :conqueuer,
-     version: "0.5.1",
+     version: "0.5.2",
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      preferred_cli_env: [espec: :test],
@@ -47,10 +47,10 @@ defmodule Conqueuer.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:espec, "~> 1.2.1", only: :test},
-      {:ex_doc, "~> 0.14.5", only: :dev},
-      {:earmark, ">= 1.0.3", only: :dev},
-      {:inflex, "~> 1.8.0"},
+      {:espec, "~> 1.4.5", only: :test},
+      {:ex_doc, "~> 0.16.2", only: :dev},
+      {:earmark, ">= 1.2.3", only: :dev},
+      {:inflex, "~> 1.8.1"},
       {:poolboy, "~> 1.5.1"}
     ]
   end

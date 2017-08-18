@@ -1,7 +1,7 @@
 defmodule ConqueuerSpec.Helpers do
 
   def start_queue_app do
-    start_pool
+    start_pool()
   end
 
   def start_queue do
